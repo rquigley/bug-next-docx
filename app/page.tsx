@@ -1,5 +1,34 @@
 import Image from 'next/image'
 
+// Doesn't work
+import { Document, Paragraph, TextRun } from 'docx';
+
+// Works
+// const { Document, Paragraph, TextRun } = require('docx');
+
+function test() {
+  const doc = new Document({
+        sections: [{
+            properties: {},
+            children: [
+                new Paragraph({
+                    children: [
+                        new TextRun("Hello World"),
+                        new TextRun({
+                            text: "Foo Bar",
+                            bold: true,
+                        }),
+                        new TextRun({
+                            text: "\tGithub is the best",
+                            bold: true,
+                        }),
+                    ],
+                }),
+            ],
+        }],
+    });
+}
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
